@@ -9,7 +9,8 @@ const App = () => (
 
 class CounterClass extends React.PureComponent {
   state = {
-    counter: 0
+    counter: 0,
+    toggle: false
   }
 
   increment () {
@@ -23,27 +24,43 @@ class CounterClass extends React.PureComponent {
       counter: prevState.counter - 1 
     }))
   }
+  
+  toggle () {	
+    this.setState((prevState) => ({
+      toggle: !prevState.toggle
+    }))
+  }
 
   render () {
     return (
-      <Counter
-        counter={this.state.counter}
-	increment={() => this.increment()}
-	decrement={() => this.decrement()}
-      />
+      <>
+        <Counter
+          counter={this.state.counter}
+	  increment={() => this.increment()}
+	  decrement={() => this.decrement()}
+        />
+	    
+	{this.state.toggle && <h1>Visível!</h1>}
+	<button onClick={() => this.toggle()}>Toggle</button>
+      </>
     )
   }
 }
 
 function CounterFunction () {
   const [counter, setCounter] = useState(0)
+  const [toggle, setToggle] = useState(false)
 
   return (
-    <Counter
-      counter={counter}
-      increment={() => setCounter(counter => counter + 1)}
-      decrement={() => setCounter(counter => counter - 1)}
-    />
+    <>
+      <Counter
+        counter={counter}
+        increment={() => setCounter(counter => counter + 1)}
+        decrement={() => setCounter(counter => counter - 1)}
+      />
+      {toggle && <h1>Visível!</h1>}
+      <button onClick={() => setToggle(!toggle)}>Toggle</button>
+    </>
   )
 }
 
