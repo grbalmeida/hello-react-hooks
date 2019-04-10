@@ -13,15 +13,15 @@ class CounterClass extends React.PureComponent {
   }
 
   increment () {
-    this.setState({
-      counter: this.state.counter + 1
-    })
+    this.setState((prevState) => ({
+      counter: prevState.counter + 1
+    }))
   }
 
   decrement () {
-    this.setState({
-      counter: this.state.counter - 1
-    })
+    this.setState((prevState) => ({
+      counter: prevState.counter - 1 
+    }))
   }
 
   render () {
@@ -41,8 +41,8 @@ function CounterFunction () {
   return (
     <Counter
       counter={counter}
-      increment={() => setCounter(counter + 1)}
-      decrement={() => setCounter(counter - 1)}
+      increment={() => setCounter(counter => counter + 1)}
+      decrement={() => setCounter(counter => counter - 1)}
     />
   )
 }
